@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cronograma de estudos – Ciências Contábeis, Univértix 2027/1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1F5;--surface:#fff;--ink:#14213D;--muted:#55607a;--line:#d5dbe6;--red:#C8323C;--fill:#14213D;--soft:#e4e9f1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--surface:#17203a;--ink:#e8ecf5;--muted:#9aa6c0;--line:#2a3558;--red:#ff6b74;--fill:#e8ecf5;--soft:#212c4d}}
+:root[data-theme="dark"]{--bg:#0f1624;--surface:#17203a;--ink:#e8ecf5;--muted:#9aa6c0;--line:#2a3558;--red:#ff6b74;--fill:#e8ecf5;--soft:#212c4d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Instrument Sans",system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 18px 64px}
+h1,h2{font-family:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;line-height:1.05;margin:0}
+h2{font-size:26px;margin:44px 0 6px}
+.sub{color:var(--muted);margin:0 0 16px;max-width:60ch}
+.hero{display:flex;gap:22px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:22px}
+.hero h1{font-size:clamp(34px,7vw,56px);font-weight:800;max-width:14ch}
+.count{text-align:right}
+.count b{display:block;font:800 clamp(72px,18vw,128px)/0.85 "Bricolage Grotesque",sans-serif;color:var(--red)}
+.count span{color:var(--muted);font-size:14px}
+.bar{height:10px;background:var(--soft);border-radius:5px;overflow:hidden;margin:18px 0 6px}
+.bar i{display:block;height:100%;background:var(--red);width:0;transition:width .3s}
+.prog{font-size:14px;color:var(--muted);display:flex;justify-content:space-between}
+.dates{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line)}
+.dates li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.dates time{font-weight:600}
+.dates .hot time,.dates .hot span{color:var(--red)}
+.tabs{display:inline-flex;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin:6px 0 14px}
+.tabs button{font:600 14px "Instrument Sans",sans-serif;padding:8px 14px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.w{display:grid;grid-template-columns:130px 1fr 40px;gap:10px;align-items:center;margin:7px 0;font-size:15px}
+.w div{height:14px;background:var(--soft);border-radius:3px}
+.w div i{display:block;height:100%;background:var(--ink);border-radius:3px}
+.w b{text-align:right}
+.rules{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--red);border-radius:6px;padding:14px 16px;margin-top:16px}
+.rules p{margin:0 0 6px}.rules p:last-child{margin:0}
+.day{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);position:relative}
+.day.today{background:var(--surface);margin:0 -12px;padding:16px 12px;border-radius:8px;border:2px solid var(--red)}
+.day label{cursor:pointer}
+.day input{position:absolute;opacity:0;width:34px;height:24px;margin:0}
+.bub{display:block;width:30px;height:21px;border:2px solid var(--ink);border-radius:50%;margin-top:3px;transition:background .15s}
+.day input:checked+.bub{background:var(--fill)}
+.day input:focus-visible+.bub{outline:3px solid var(--red);outline-offset:2px}
+.day.done h3,.day.done li{color:var(--muted)}
+.day h3{margin:0 0 4px;font:700 17px "Bricolage Grotesque",sans-serif}
+.day h3 em{font-style:normal;color:var(--red);font-size:13px;font-family:"Instrument Sans",sans-serif;font-weight:600;margin-left:6px}
+.day ul{margin:0;padding-left:18px}
+.day li{margin:2px 0}
+.alert{font-weight:600;color:var(--red)}
+.reset{margin-top:18px;font:500 14px "Instrument Sans",sans-serif;background:none;border:1px solid var(--line);color:var(--muted);padding:7px 12px;border-radius:6px;cursor:pointer}
+footer{margin-top:44px;color:var(--muted);font-size:13px}
+@media(max-width:520px){.dates li{grid-template-columns:1fr;gap:0}.w{grid-template-columns:104px 1fr 34px}.count{text-align:left}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <h1>Cronograma de estudos para Ciências Contábeis</h1>
+  <div class="count"><b id="dias">–</b><span id="cdtxt">dias para a prova · domingo, 18/10/2026, 14h</span></div>
+</header>
+
+<div class="bar" aria-hidden="true"><i id="pb"></i></div>
+<div class="prog"><span id="pt">0 de 19 dias concluídos</span><span>Marque a bolinha de cada dia, como no cartão de respostas</span></div>
+
+<h2>Datas que não podem passar</h2>
+<p class="sub">Retiradas do Edital nº 21/2026. Ciências Contábeis: turno da noite, 4 anos, 120 vagas, inscrição de R$ 30.</p>
+<ul class="dates">
+  <li class="hot"><time>14/10 · 18h</time><span>Fim das inscrições e do pagamento da taxa (R$ 30; Medicina R$ 500) em univertix.edu.br</span></li>
+  <li><time>15/10</time><span>Prazo para enviar laudo ao pedir atendimento especial (vestibular@univertix.edu.br)</span></li>
+  <li class="hot"><time>18/10 · 14h</time><span>Prova, até 18h, em Matipó (Rodovia Ozires Linhares Fraga, s/n). Portões: chegar 1h30 antes; ninguém entra após 13h45</span></li>
+  <li><time>18/10 · 19h</time><span>Gabarito. Pedidos de revisão de questão até 19/10 às 18h</span></li>
+  <li><time>20/10 · 13h</time><span>Gabarito definitivo</span></li>
+  <li><time>27/10</time><span>Resultado preliminar às 9h · vista e revisão das 13h às 17h · resultado final às 18h</span></li>
+  <li><time>28/10 a 30/11</time><span>Matrícula, com isenção da taxa, na recepção do campus Centro (7h às 12h e 13h às 19h). Cancelar depois custa multa de 50% da mensalidade</span></li>
+  <li><time>01/02/2027</time><span>Início previsto das aulas</span></li>
+</ul>
+
+<h2>Onde estão os pontos</h2>
+<p class="sub">A prova tem 100 pontos. A redação vale 30, e Português e Matemática valem 15 cada.</p>
+<div id="pesos"></div>
+<div class="rules">
+  <p class="alert">Eliminação: menos de 2 pontos em Química ou menos de 2 em Biologia na prova objetiva. Nesse bloco cada questão vale 2 pontos, então um acerto em cada já basta.</p>
+  <p>Redação: nota zero com menos de 20 linhas. Perde 1 ponto por linha acima de 30, 5 pontos por fuga parcial do tema e 2 pontos sem título. Só é corrigida se você passar nas objetivas.</p>
+  <p>Cada questão tem 5 alternativas e uma resposta. Questão em branco, rasurada ou com duas marcas não conta. Sem segunda chamada.</p>
+</div>
+
+<h2>Plano dia a dia</h2>
+<p class="sub">Dos dias de hoje até a prova. Mais tempo para Redação, Português e Matemática, que somam 60 pontos, e o mínimo necessário em Biologia e Química para não ser eliminado.</p>
+<div id="plano"></div>
+<button class="reset" id="reset">Limpar marcações</button>
+
+<footer>Baseado no Edital nº 21/2026 da Univértix. Confira sempre o site oficial: www.univertix.edu.br.</footer>
+</main>
+
+<script>
+var PLANO=[
+["2026-09-30","Qua","Português: interpretação de texto e concordância|Redação: estrutura dissertativa (introdução, 2 ou 3 parágrafos, conclusão) e título"],
+["2026-10-01","Qui","Matemática: números, razão, proporção e porcentagem|Biologia: citologia (organelas, membranas)"],
+["2026-10-02","Sex","Química: substâncias, atomística e tabela periódica|Português: regência, crase e colocação pronominal"],
+["2026-10-03","Sáb","Biologia: genética (Mendel, grupos sanguíneos, Hardy-Weinberg)|Redação: um texto completo de 20 a 30 linhas"],
+["2026-10-04","Dom","Matemática: funções, PA e PG|História: Antiguidade, Idade Média e Absolutismo"],
+["2026-10-05","Seg","Química: ligações, forças intermoleculares e funções inorgânicas|Geografia: espaço mundial e globalização"],
+["2026-10-06","Ter","Matemática: geometria plana e espacial|Biologia: ecologia e origem da vida"],
+["2026-10-07","Qua","Português: movimentos literários, do Arcadismo ao Modernismo|Redação: refazer o texto de sábado corrigindo coesão e pontuação"],
+["2026-10-08","Qui","Matemática: análise combinatória e probabilidade|História: Iluminismo, Revolução Francesa e Industrial, guerras mundiais"],
+["2026-10-09","Sex","Química: reações, estequiometria e soluções|Biologia: histologia, zoologia e botânica"],
+["2026-10-10","Sáb","Matemática: juros simples e compostos, regra de três e porcentagem|Redação: novo tema, com tempo marcado"],
+["2026-10-11","Dom","Geografia: espaço brasileiro, domínios morfoclimáticos e meio ambiente|História do Brasil: colônia, Independência, República e ditadura"],
+["2026-10-12","Seg","Química: orgânica (funções, isomeria, reações) e termoquímica|Matemática: estatística, juros e raciocínio lógico"],
+["2026-10-13","Ter","Física: revisão do básico (mecânica, energia e eletricidade)|Inglês ou Espanhol: leitura, vocabulário e tempos verbais"],
+["2026-10-14","Qua","!Último dia para se inscrever e pagar a taxa, até 18h|Revisão de Biologia e Química, que valem a eliminação"],
+["2026-10-15","Qui","Simulado de objetivas: 35 questões em 4h, no horário da prova (14h às 18h)|Redação cronometrada"],
+["2026-10-16","Sex","Revisar os erros do simulado|Separar documentos: identidade original com foto, e-título ou CNH digital, e o comprovante de inscrição"],
+["2026-10-17","Sáb","Revisão leve de fórmulas e regras de redação|Descansar e dormir cedo. Conferir o trajeto até o local da prova"],
+["2026-10-18","Dom","!Dia da prova: chegar às 12h30, entrar até 13h30|Levar só os documentos. Cabelo preso, sem celular, relógio ou bolsa"]
+];
+var KEY="univertix2027_feitos",feitos={};
+try{feitos=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){feitos={}}
+function salvar(){try{localStorage.setItem(KEY,JSON.stringify(feitos))}catch(e){}}
+function fmt(d){var p=d.split("-");return p[2]+"/"+p[1]}
+function hoje(){var n=new Date();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0")}
+function render(){
+  var h=hoje(),el=document.getElementById("plano"),html="",feitosN=0;
+  PLANO.forEach(function(d,i){
+    var ok=!!feitos[d[0]];if(ok)feitosN++;
+    var itens=d[2].split("|").map(function(t){return t.charAt(0)=="!"?'<li class="alert">'+t.slice(1)+'</li>':'<li>'+t+'</li>'}).join("");
+    html+='<div class="day'+(d[0]==h?' today':'')+(ok?' done':'')+'"><label><input type="checkbox" data-d="'+d[0]+'"'+(ok?' checked':'')+' aria-label="Marcar '+fmt(d[0])+' como concluído"><span class="bub"></span></label><div><h3>'+d[1]+', '+fmt(d[0])+(d[0]==h?'<em>hoje</em>':'')+'</h3><ul>'+itens+'</ul></div></div>';
+  });
+  el.innerHTML=html;
+  var pct=Math.round(feitosN/PLANO.length*100);
+  document.getElementById("pb").style.width=pct+"%";
+  document.getElementById("pt").textContent=feitosN+" de "+PLANO.length+" dias concluídos";
+  el.querySelectorAll("input").forEach(function(c){c.addEventListener("change",function(){
+    if(c.checked)feitos[c.dataset.d]=1;else delete feitos[c.dataset.d];salvar();render()})});
+}
+function contagem(){
+  var alvo=new Date(2026,9,18,14,0,0),agora=new Date(),ms=alvo-agora;
+  var b=document.getElementById("dias"),t=document.getElementById("cdtxt");
+  if(ms<=0){b.textContent="0";t.textContent="A prova já aconteceu. Resultado final em 27/10/2026.";return}
+  var d=Math.ceil(ms/864e5);b.textContent=d;
+  t.textContent=(d==1?"dia":"dias")+" para a prova · domingo, 18/10/2026, 14h";
+}
+var PESOS=[
+ [["Redação",30],["Português",15],["Matemática",15],["Física/Química",10],["Biologia",10],["História",8],["Geografia",8],["Inglês/Espanhol",4]],
+ [["Redação",30],["Biologia",20],["Química",20],["Português",15],["Inglês/Espanhol",5],["Física",5],["Matemática",5]]
+];
+function pesos(k){
+  document.getElementById("pesos").innerHTML=PESOS[k].map(function(p){
+    return '<div class="w"><span>'+p[0]+'</span><div><i style="width:'+(p[1]/30*100)+'%"></i></div><b>'+p[1]+'</b></div>'}).join("");
+}
+document.getElementById("reset").onclick=function(){feitos={};salvar();render()};
+pesos(0);render();contagem();
+</script>
+</body>
+</html>
